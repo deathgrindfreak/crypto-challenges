@@ -1,6 +1,6 @@
 {-# LANGUAGE OverloadedStrings #-}
 
-module Challenge5 where
+module Challenge5 (repeatingKeyXor, stoh) where
 
 import Data.Char
 import Data.Bits

@@ -1,6 +1,6 @@
 {-# LANGUAGE OverloadedStrings #-}
 
-module Challenge4 where
+module Challenge4 () where
 
 import qualified Data.Text.Lazy as T
 import System.IO

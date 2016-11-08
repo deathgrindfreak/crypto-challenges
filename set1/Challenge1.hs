@@ -1,14 +1,28 @@
 {-# LANGUAGE OverloadedStrings #-}
 
-module Challenge1 (hto64, ito64, htoi, itoh) where
+module Challenge1 (b64toh, b64toi, hto64, ito64, htoi, itoh) where
 
 import qualified Data.Text.Lazy as T
 import Data.Char
 
-main = putStrLn $ "Challenge1: " ++ show (test64 == hto64 testHex)
+main = do
+    putStrLn $ "Challenge1: " ++ show (test64 == hto64 testHex)
+    putStrLn $ "Challenge1: " ++ show (b64toh test64 == testHex)
 
 hto64 :: T.Text -> T.Text
 hto64 = ito64 . htoi
+
+b64toi :: T.Text -> Integer
+b64toi = T.foldl (\a x -> 64 * a + (toInteger . asi $ x)) 0
+    where
+    asi '+' = 62
+    asi '/' = 63
+    asi x | x `elem` ['A'..'Z'] = ord x - ord 'A'
+          | x `elem` ['a'..'z'] = ord x - ord 'a' + 26
+          | x `elem` ['0'..'9'] = ord x - ord '0' + 52
+
+b64toh :: T.Text -> T.Text
+b64toh = itoh . b64toi
 
 itoh :: Integer -> T.Text
 itoh 0 = "0"
