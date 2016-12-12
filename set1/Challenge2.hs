@@ -2,13 +2,13 @@
 
 module Challenge2 (xorHex) where
 
-import qualified Data.Text.Lazy as T
+import qualified Data.ByteString.Lazy.Char8 as B 
 import Data.Bits
 import Challenge1
 
 main = putStrLn $ "Challenge2: " ++ show (result == xorHex test1 test2)
 
-xorHex :: T.Text -> T.Text -> T.Text
+xorHex :: B.ByteString -> B.ByteString -> B.ByteString
 xorHex a b = itoh $ xor (htoi a) (htoi b) 
 
 test1 = "1c0111001f010100061a024b53535009181c"
